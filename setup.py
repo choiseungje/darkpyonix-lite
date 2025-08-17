@@ -41,7 +41,7 @@ print("[DarkPyonix] Notebooks with same file path will share kernels.")
     with open(config_file, 'w', encoding='utf-8') as f:
         f.write(config_content)
 
-    print(f"✅ Jupyter config file created: {config_file}")
+    print(f"[OK] Jupyter config file created: {config_file}")
 
     # Also create environment variable setup script
     env_script = venv_path / "bin" / "darkpyonix-env.sh"
@@ -69,13 +69,13 @@ echo "DarkPyonix environment activated!"
     if not os.name == "nt":
         os.chmod(env_script, 0o755)
 
-    print(f"✅ Environment script created: {env_script}")
+    print(f"[OK] Environment script created: {env_script}")
 
     # Modify virtual environment activate script
     try:
         modify_activate_script(venv_path, jupyter_config_dir)
     except Exception as e:
-        print(f"⚠️  Failed to modify activate script (manual setup required): {e}")
+        print(f"[WARNING] Failed to modify activate script (manual setup required): {e}")
 
 def modify_activate_script(venv_path, jupyter_config_dir):
     """Add automatic configuration to virtual environment activate script"""
@@ -109,7 +109,7 @@ export STICKYKM_NAMESPACE="default-{venv_path.name}"
     with open(activate_script, 'a') as f:
         f.write(darkpyonix_config)
 
-    print(f"✅ Activate script modification complete: {activate_script}")
+    print(f"[OK] Activate script modification complete: {activate_script}")
 
 class PostInstallCommand(install):
     """Execute automatic configuration after installation"""
@@ -119,9 +119,9 @@ class PostInstallCommand(install):
         print("DarkPyonix Installation Complete!")
         print("="*50)
         create_jupyter_config()
-        print("\n🎉 Setup complete! Now run jupyter server:")
+        print("\n[SUCCESS] Setup complete! Now run jupyter server:")
         print(f"   jupyter server --port=8888")
-        print("\n📖 Usage:")
+        print("\nUsage:")
         print("   - Same file opened multiple times will reuse the same kernel")
         print("   - Multiple users can share kernels for the same file")
         print("="*50 + "\n")
@@ -137,14 +137,14 @@ class PostDevelopCommand(develop):
         print("="*50 + "\n")
 
 setup(
-    name="darkpyonix-lite",
+    name="darkpyonix",
     version="1.0.0",
     author="Your Name",
     author_email="your.email@example.com",
     description="Sticky Kernel Manager for Jupyter - File-based kernel reuse",
     long_description=open("README.md", encoding='utf-8').read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/choiseungje/darkpyonix-lite",
+    url="https://github.com/yourusername/DarkPyonix",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
