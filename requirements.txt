@@ -1,0 +1,4 @@
+jupyter-server>=2.0.0
+ipykernel>=6.0.0
+notebook-shim>=0.2.0
+jupyter-client>=8.0.0
