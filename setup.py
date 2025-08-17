@@ -21,21 +21,18 @@ def create_jupyter_config():
 
     config_content = '''# DarkPyonix Auto-Generated Configuration
 # This file was automatically generated during DarkPyonix installation.
+c = get_config()  #noqa
 
-# Activate Sticky Kernel Manager
-c.ServerApp.kernel_manager_class = 'DarkPyonix_km.manager.StickyMappingKernelManager'
-c.ServerApp.session_manager_class = 'DarkPyonix_km.manager.StickySessionManager'
+import sys
+import os
 
-# Basic settings
-c.ServerApp.ip = '127.0.0.1'
-c.ServerApp.open_browser = False
-c.ServerApp.allow_root = True
+from DarkPyonix_km.manager import StickyMappingKernelManager
 
-# Logging level (for development)
-# c.Application.log_level = 'DEBUG'
+# 커널 매니저 설정
+c.ServerApp.kernel_manager_class = StickyMappingKernelManager
 
-print("[DarkPyonix] Sticky Kernel Manager activated!")
-print("[DarkPyonix] Notebooks with same file path will share kernels.")
+# 로깅 레벨 설정 (디버깅용)
+c.ServerApp.log_level = 'INFO'
 '''
 
     with open(config_file, 'w', encoding='utf-8') as f:
